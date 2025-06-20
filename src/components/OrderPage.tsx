@@ -1,10 +1,12 @@
+import NavigateButton from "./shared/button/NavigateButton";
+
 function OrderPage() {
   return (
     <section className="d-flex flex-column">
         <div className="">
 
         </div>
-        <button>GÖR EN NY BESTÄLLNING</button>
+       <NavigateButton text="GÖR EN NY BESTÄLLNING" urlPath="/" classes={['btn-primary text-center']} /> 
     </section>
   )
   
