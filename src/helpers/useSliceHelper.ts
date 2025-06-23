@@ -1,0 +1,11 @@
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import type { Status } from "../models/status";
+
+export function useSliceStatus(sliceName: keyof RootState) {
+  const loading = useSelector((state: RootState) => state[sliceName].loading);
+  const error = useSelector((state: RootState) => state[sliceName].error);
+  const status = useSelector((state: RootState) => state[sliceName].status as Status);
+
+  return { loading, error, status };
+}

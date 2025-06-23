@@ -6,7 +6,6 @@ import type { Order } from "../models/order";
 export const postOrder = createAsyncThunk<Order, PostOrder>(
   "postOrder",
   async (order: PostOrder, thunkAPI) => {
-    console.log(order);
     try {
       const response = await fetch(
         "https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/pierre-lidholm/orders",
@@ -14,8 +13,7 @@ export const postOrder = createAsyncThunk<Order, PostOrder>(
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-zocom": "um-B2mWxADrthdHqd22",
-            tentant: "pierre-lidholm",
+            "X-Zocom": "um-B2mWxADrthdHqd22"
           },
           body: JSON.stringify(order),
         }
@@ -25,8 +23,8 @@ export const postOrder = createAsyncThunk<Order, PostOrder>(
         return thunkAPI.rejectWithValue(await response.json());
       }
 
-      const data: Order = await response.json();
-      return data;
+      const data = await response.json();
+      return data.order;
     } catch (error) {
       return thunkAPI.rejectWithValue(`Error ${error}`);
     }
@@ -36,24 +34,25 @@ export const postOrder = createAsyncThunk<Order, PostOrder>(
 export const fetchOrder = createAsyncThunk<Order, string>(
   "fetchOrder",
   async (orderId, thunkAPI) => {
+
     try {
       const response = await fetch(
         `https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/pierre-lidholm/orders/${orderId}`,
         {
           headers: {
             "x-zocom": "um-B2mWxADrthdHqd22",
-            "tentant": "pierre-lidholm",
-            "id": orderId,
           },
         }
       );
+
 
       if (!response.ok) {
         return thunkAPI.rejectWithValue(await response.json());
       }
 
-      const data: Order = await response.json();
-      return data;
+      const data = await response.json();
+
+      return data.order as Order;
     } catch (error) {
       return thunkAPI.rejectWithValue(`Error: ${error}`);
     }
@@ -68,6 +67,8 @@ const initialState: InitialState<Order> = {
     id: null,
     items: [],
     timestamp: null,
+    eta: null,
+    orderValue: null
   },
 };
 
@@ -91,18 +92,20 @@ const orderSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(fetchOrder.pending, (state) => {
-        state.loading = true;
-        state.status = "pending";
+      state.loading = true;
+      state.status = "pending";
     });
     builder.addCase(fetchOrder.fulfilled, (state, action) => {
-        state.error = false;
-        state.status = "success";
-        state.data = action.payload;
+      state.error = false;
+      state.data = action.payload;
+      state.status = "success"
+      state.loading = false;
     });
-     builder.addCase(fetchOrder.rejected, (state) => {
-        state.error = false;
-        state.status = "failed";
-    })
+    builder.addCase(fetchOrder.rejected, (state) => {
+      state.error = true;
+      state.status = "failed";
+      state.loading = false;
+    });
   },
 });
 

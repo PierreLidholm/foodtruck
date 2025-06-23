@@ -1,8 +1,8 @@
 function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-4 mt-auto">
+    <footer className="header-footer-bg text-black py-4 mt-auto">
       <div className="container mx-auto text-center">
-        <p>&copy; {new Date().getFullYear()} My Website. All rights reserved.</p>
+        <p className="m-0">&copy; {new Date().getFullYear()} Pierre Lidholm</p>
       </div>
     </footer>
   );

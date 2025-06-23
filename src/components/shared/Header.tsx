@@ -13,7 +13,7 @@ function Header () {
   }
 
   return (
-    <header className="bg-transparent " role="banner">
+    <header className="p-3 header-footer-bg" role="banner" >
       <nav className="navbar  navbar-light container p-0" aria-label="Main navigation">
         <a className="navbar-brand fw-bold" onClick={() => navigateToPage(`/`)}>
           <i className="fa-solid fa-house"></i>

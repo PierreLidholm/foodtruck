@@ -3,33 +3,30 @@ import type { AppDispatch, RootState } from "../../store/store";
 import ProductCard from "./FoodCard";
 import { useEffect, useMemo } from "react";
 import { fetchProducts } from "../../reducers/productReducer";
-import { fetchAuthorization } from "../../reducers/authorizationReducer";
 import type { Product } from "../../models/product";
 import SideItemsCard from "./SideItemsCard";
 import { addToCart } from "../../reducers/cartReducer";
+import { useSliceStatus } from "../../helpers/useSliceHelper";
+import LoadingBanner from "../shared/loading/LoadingBanner";
+import ErrorBanner from "../shared/error/ErrorBanner";
 
 function ProductList() {
   const dispatch = useDispatch<AppDispatch>();
-  const auth = useSelector((state: RootState) => state.authorization);
   const products: Product[] = useSelector(
     (state: RootState) => state.product.data
   );
+
+  const { loading, error, status } = useSliceStatus("product");
 
   const handleAddToCart = (product: Product) => {
     dispatch(addToCart(product));
   };
 
   useEffect(() => {
-    if (auth.status === "idle") {
-      dispatch(fetchAuthorization());
-    }
-  }, [auth.status, dispatch]);
-
-  useEffect(() => {
-    if (auth.status === "success" && products.length === 0) {
+    {
       dispatch(fetchProducts());
     }
-  }, [auth.status, dispatch, products.length]);
+  }, [dispatch, ]);
 
   const meals: Product[] = useMemo(() => {
     return products.filter((product) => product.type === "wonton");
@@ -43,6 +40,10 @@ function ProductList() {
     return products.filter((product) => product.type === "drink");
   }, [products]);
 
+  if (loading) return <LoadingBanner />;
+
+    if(error || status == "failed") return <ErrorBanner text={"Något gick fel. Försök igen."} />
+
   return (
     <ul className="list-unstyled">
       {meals.map((meal) => (
@@ -51,10 +52,14 @@ function ProductList() {
         </li>
       ))}
       <li>
-        <SideItemsCard products={dips} type="dip" />
+        <SideItemsCard products={dips} type="dip" addToCart={handleAddToCart} />
       </li>
       <li>
-        <SideItemsCard products={drinks} type="drink" />
+        <SideItemsCard
+          products={drinks}
+          type="drink"
+          addToCart={handleAddToCart}
+        />
       </li>
     </ul>
   );
