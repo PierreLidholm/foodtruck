@@ -1,0 +1,16 @@
+.header-footer-bg{
+  background-color: rgb(245, 240, 235);
+}
+
+.btn-order {
+  background-color: #353131;
+  color: white;
+}
+
+.btn-receipt {
+  background-color: transparent;
+
+  color: #F4F3F1F0;
+
+  border: solid 1px #F4F3F1F0;
+}

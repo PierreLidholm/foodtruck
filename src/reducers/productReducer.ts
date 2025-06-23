@@ -7,20 +7,14 @@ export const fetchProducts = createAsyncThunk<
   Product[],
   void,
   { state: RootState }
->("fetchProducts", async (_, { getState, rejectWithValue }) => {
-  const state = getState() as RootState;
-  const key = state.authorization.data;
-
-  if (!key) {
-    return rejectWithValue("Authorization key not found");
-  }
+>("fetchProducts", async (_, { rejectWithValue }) => {
 
   try {
     const response = await fetch(
       "https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/menu",
       {
         headers: {
-          "x-zocom": key,
+          "x-zocom": "um-B2mWxADrthdHqd22",
         },
       },
     );
@@ -45,11 +39,13 @@ const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
+      console.log("fetchProducts.pending fired");
       state.loading = true;
       state.status = "pending";
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.loading = false;
+      state.error = false;
       state.data = action.payload;
       state.status = "success";
     });
