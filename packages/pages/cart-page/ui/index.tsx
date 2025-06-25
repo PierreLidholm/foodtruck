@@ -1,16 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { Product } from "../models/product";
-import type { AppDispatch, RootState } from "../store/store";
-import CartList from "./cart/CartList";
-import type { CartProduct } from "../models/cartProduct";
 import { useMemo, useState } from "react";
-import type { PostOrder } from "../models/postOrder";
-import { postOrder } from "../reducers/orderReducer";
 import { useNavigate } from "react-router-dom";
-import type { Order } from "../models/order";
-import { useSliceStatus } from "../helpers/useSliceHelper";
 import { LoadingBanner, ErrorBanner } from "@pierre/base/ui";
-import { setCartToEmpty } from "../reducers/cartReducer";
+import type { AppDispatch, RootState } from "@pierre/core/store";
+import { useSliceStatus } from "@pierre/base/hooks";
+import type { CartProduct, Order, Product } from "@pierre/core/models";
+import { postOrder } from "packages/core/api/order";
+import { setCartToEmpty } from "src/reducers/cartReducer";
+import type { PostOrder } from "src/models/postOrder";
+import CartList from "../components/CartList";
 
 function CartPage() {
   const navigate = useNavigate();
@@ -32,7 +30,7 @@ function CartPage() {
       .then((response: Order) => {
         navigate(`/order/${response.id}`);
 
-        dispatch(setCartToEmpty())
+        dispatch(setCartToEmpty());
       })
       .catch((error) => {
         setErrorMessage(`Something went wrong! ${error} `);
@@ -94,4 +92,4 @@ function CartPage() {
   );
 }
 
-export default CartPage;
+export { CartPage };

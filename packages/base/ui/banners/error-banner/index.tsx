@@ -19,4 +19,4 @@ function ErrorBanner({ text }: ErrorBannerProps) {
   );
 }
 
-export default ErrorBanner;
+export { ErrorBanner };

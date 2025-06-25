@@ -6,6 +6,17 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pierre/base/ui": ["packages/base/ui"],
+      "@pierre/base/hooks": ["packages/base/hooks"],
+      "@pierre/core/models": ["packages/core/models"],
+      "@pierre/core": ["packages/core"],
+      "@pierre/core/api": ["packages/core/api"],
+      "@pierre/core/store": ["packages/core/store"],
+      "@pierre/core/router": ["packages/core/router"],
+      "@pierre/pages": ["packages/pages"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -23,5 +34,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src", "packages"]
 }

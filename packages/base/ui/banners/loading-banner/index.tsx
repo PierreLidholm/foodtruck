@@ -9,4 +9,4 @@ function LoadingBanner() {
   );
 }
 
-export default LoadingBanner;
+export { LoadingBanner };

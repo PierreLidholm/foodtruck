@@ -3,12 +3,10 @@ import type { AppDispatch, RootState } from "../store/store";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import type { Receipt } from "../models/receipt";
+import { LoadingBanner, ErrorBanner, NavigationButton } from "@pierre/base/ui";
 import { fetchReceipt } from "../reducers/receiptReducer";
-import LoadingBanner from "./shared/loading/LoadingBanner";
-import ErrorBanner from "./shared/error/ErrorBanner";
 import { useSliceStatus } from "../helpers/useSliceHelper";
 import ReceiptList from "./receipt/ReceiptList";
-import NavigateButton from "./shared/button/NavigateButton";
 import yygsImage from "../assets/images/YYGS.png";
 
 function ReceiptPage() {
@@ -57,7 +55,7 @@ function ReceiptPage() {
       </div>
 
       <div className="container mt-auto mb-2">
-        <NavigateButton
+        <NavigationButton
           text={"GÖR EN NY BESTÄLLNING"}
           urlPath={"/"}
           classes={["btn-order text-center text-white mb-2 mt-3 p-3 w-100"]}

@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../store/store";
-import ProductCard from "./FoodCard";
+import type { AppDispatch, RootState } from "@pierre/core/store";
+import { FoodCard } from "./FoodCard";
 import { useEffect, useMemo } from "react";
-import { fetchProducts } from "../../reducers/productReducer";
-import type { Product } from "../../models/product";
-import SideItemsCard from "./SideItemsCard";
-import { addToCart } from "../../reducers/cartReducer";
-import { useSliceStatus } from "../../helpers/useSliceHelper";
+import { fetchProducts } from "@pierre/core/api";
+import type { Product } from "@pierre/core/models";
+import SideItemsCard from "./SideItemCard";
+import { addToCart } from "@pierre/core/store";
+import { useSliceStatus } from "@pierre/base/hooks";
 import { LoadingBanner, ErrorBanner } from "@pierre/base/ui";
 
 function ProductList() {
@@ -47,7 +47,7 @@ function ProductList() {
     <ul className="list-unstyled">
       {meals.map((meal) => (
         <li key={meal.id} onClick={() => handleAddToCart(meal)}>
-          <ProductCard product={meal} />
+          <FoodCard product={meal} />
         </li>
       ))}
       <li>
@@ -64,4 +64,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export {ProductList};
