@@ -2,12 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoadingBanner, ErrorBanner } from "@pierre/base/ui";
-import type { AppDispatch, RootState } from "@pierre/core/store";
+import { setCartToEmpty, type AppDispatch, type RootState } from "@pierre/core/store";
 import { useSliceStatus } from "@pierre/base/hooks";
-import type { CartProduct, Order, Product } from "@pierre/core/models";
+import type { CartProduct, Order, PostOrder, Product } from "@pierre/core/models";
 import { postOrder } from "packages/core/api/order";
-import { setCartToEmpty } from "src/reducers/cartReducer";
-import type { PostOrder } from "src/models/postOrder";
 import CartList from "../components/CartList";
 
 function CartPage() {
@@ -33,7 +31,7 @@ function CartPage() {
         dispatch(setCartToEmpty());
       })
       .catch((error) => {
-        setErrorMessage(`Something went wrong! ${error} `);
+        setErrorMessage(`${error.message} `);
       });
   };
 

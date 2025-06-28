@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../store/store";
+
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import type { Receipt } from "../models/receipt";
+import { yygsImage } from "@pierre/core/assets";
 import { LoadingBanner, ErrorBanner, NavigationButton } from "@pierre/base/ui";
-import { fetchReceipt } from "../reducers/receiptReducer";
-import { useSliceStatus } from "../helpers/useSliceHelper";
-import ReceiptList from "./receipt/ReceiptList";
-import yygsImage from "../assets/images/YYGS.png";
+
+import type { AppDispatch, RootState } from "@pierre/core/store";
+import type { Receipt } from "@pierre/core/models";
+import { ReceiptList } from "../components/ReceiptList";
+import { useSliceStatus } from "packages/base/hooks/useSliceStatus";
+import { fetchReceipt } from "packages/core/api/receipt";
 
 function ReceiptPage() {
   const params = useParams();
@@ -37,7 +39,10 @@ function ReceiptPage() {
       className="d-flex flex-column justify-content-between"
       style={{ minHeight: "90vh", backgroundColor: "#605858" }}
     >
-      <div className="container mx-5 bg-white d-flex flex-column justify-content-between mt-5"  style={{ minHeight: "70vh", backgroundColor: "#605858" }}>
+      <div
+        className="container mx-5 bg-white d-flex flex-column justify-content-between mt-5 mx-auto"
+        style={{ minHeight: "70vh", backgroundColor: "#605858" }}
+      >
         <div className="mx-auto mt-4 mb-3 bg-white">
           <img src={yygsImage} alt="" style={{ backgroundColor: "red" }} />
         </div>
@@ -65,4 +70,4 @@ function ReceiptPage() {
   );
 }
 
-export default ReceiptPage;
+export { ReceiptPage };

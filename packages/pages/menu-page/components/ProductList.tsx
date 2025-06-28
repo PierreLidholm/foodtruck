@@ -8,6 +8,7 @@ import SideItemsCard from "./SideItemCard";
 import { addToCart } from "@pierre/core/store";
 import { useSliceStatus } from "@pierre/base/hooks";
 import { LoadingBanner, ErrorBanner } from "@pierre/base/ui";
+import "./ProductList.css";
 
 function ProductList() {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,7 +26,7 @@ function ProductList() {
     {
       dispatch(fetchProducts());
     }
-  }, [dispatch, ]);
+  }, [dispatch]);
 
   const meals: Product[] = useMemo(() => {
     return products.filter((product) => product.type === "wonton");
@@ -41,12 +42,17 @@ function ProductList() {
 
   if (loading) return <LoadingBanner />;
 
-    if(error || status == "failed") return <ErrorBanner text={"Något gick fel. Försök igen."} />
+  if (error || status == "failed")
+    return <ErrorBanner text={"Något gick fel. Försök igen."} />;
 
   return (
     <ul className="list-unstyled">
       {meals.map((meal) => (
-        <li key={meal.id} onClick={() => handleAddToCart(meal)}>
+        <li
+          className="item"
+          key={meal.id}
+          onClick={() => handleAddToCart(meal)}
+        >
           <FoodCard product={meal} />
         </li>
       ))}
@@ -64,4 +70,4 @@ function ProductList() {
   );
 }
 
-export {ProductList};
+export { ProductList };

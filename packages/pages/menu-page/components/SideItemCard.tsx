@@ -9,7 +9,7 @@ type SideItemsCardProps = {
 
 function SideItemCard({ products, type, addToCart }: SideItemsCardProps) {
   return (
-    <article className="card mb-1 bg-transparent rounded-0 text-dark px-0 border-0">
+    <article className="card mb-1 bg-transparent rounded-0 text-white px-0 border-0">
       <header className="d-flex justify-content-between align-items-center">
         <h2 className="mb-1"> {type === "dip" ? "DIPSÅS" : "DRICKA"}</h2>
         <p className="mb-1">19 SEK</p>
@@ -18,7 +18,7 @@ function SideItemCard({ products, type, addToCart }: SideItemsCardProps) {
         {products.map((product) => (
           <div key={product.id} onClick={() => addToCart(product)} className="col-4 p-2 d-flex">
             <div
-              className="p-2 h-100 flex-fill text-center border rounded pill-color"
+              className="p-2 h-100 flex-fill text-center border rounded pill-color site-item"
             >
               <p className="small m-0">{product.name}</p>
             </div>

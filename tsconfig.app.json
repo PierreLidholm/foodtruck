@@ -15,7 +15,9 @@
       "@pierre/core/api": ["packages/core/api"],
       "@pierre/core/store": ["packages/core/store"],
       "@pierre/core/router": ["packages/core/router"],
-      "@pierre/pages": ["packages/pages"]
+      "@pierre/core/assets": ["packages/core/assets"],
+      "@pierre/pages": ["packages/pages"],
+      "@pierre/utils": ["packages/utils"],
     },
 
     /* Bundler mode */

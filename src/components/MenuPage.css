@@ -1,9 +1,0 @@
-.menu {
-    max-height: 100vh;
-    overflow: auto;
-  background-image: url("https://images2.alphacoders.com/229/thumb-1920-22930.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh; 
-}

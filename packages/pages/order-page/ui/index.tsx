@@ -1,13 +1,14 @@
-import type { Order } from "../models/order";
-import { NavigationButton, LoadingBanner, ErrorBanner } from "@pierre/ui";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../store/store";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { fetchOrder } from "../reducers/orderReducer";
-import { CalculateTimeDifferenceInMinutes } from "../helpers/timeHelper";
-import { useSliceStatus } from "../helpers/useSliceHelper";
-import lunchbox from "../assets/images/lunchbox.png";
+import type { AppDispatch, RootState } from "@pierre/core/store";
+import { useSliceStatus } from "@pierre/base/hooks";
+import type { Order } from "@pierre/core/models";
+import { ErrorBanner, LoadingBanner } from "packages/base/ui/banners";
+import { CalculateTimeDifferenceInMinutes } from "@pierre/utils";
+import { NavigationButton } from "packages/base/ui/navigation-button";
+import { lunchboxImage } from "@pierre/core/assets";
+import { fetchOrder } from "packages/core/api/order";
 
 function OrderPage() {
   const params = useParams();
@@ -30,11 +31,12 @@ function OrderPage() {
 
   return (
     <section
-      className="d-flex flex-column justify-content-between  text-white bg-secondary bg-gradient"
-      style={{ height: "100vh" }}
+      className="d-flex flex-column justify-content-between  text-white bg-secondary bg-gradient" style={
+        { minHeight: "100vh" }
+      }
     >
       <div className="mt-5 mb-3">
-        <img className="img-fluid " src={lunchbox} alt="" />
+        <img className="img-fluid " src={lunchboxImage} alt="" />
 
         <p className="fs-2 fw-bold mb-1">DINA WONTON TILLAGAS!</p>
         <p className="fs-3 mb-1">
@@ -58,4 +60,4 @@ function OrderPage() {
   );
 }
 
-export default OrderPage;
+export { OrderPage };

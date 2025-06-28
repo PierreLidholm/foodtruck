@@ -1,9 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import { MenuPage, Layout, CartPage } from "@pierre/pages";
+import { MenuPage, Layout, CartPage, OrderPage, ReceiptPage } from "@pierre/pages";
 
-// import Layout from "./components/layout/layout";
-// import OrderPage from "./components/OrderPage";
-// import ReceiptPage from "./components/ReceiptPage";
 
 const routes = createBrowserRouter([
   {
@@ -18,14 +15,14 @@ const routes = createBrowserRouter([
         path: "cart",
         element: <CartPage />
       },
-      // {
-      //   path: "order/:id",
-      //   element: <OrderPage />
-      // },
-      // {
-      //   path: "receipt/:id",
-      //   element: <ReceiptPage />
-      // }
+      {
+        path: "order/:id",
+        element: <OrderPage />
+      },
+      {
+        path: "receipt/:id",
+        element: <ReceiptPage />
+      }
     ],
   },
 ]);

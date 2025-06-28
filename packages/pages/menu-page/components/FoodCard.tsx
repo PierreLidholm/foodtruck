@@ -6,7 +6,7 @@ type ProductCardProps = {
 
 function FoodCard({ product }: ProductCardProps) {
   return (
-    <article className="card mb-1 bg-transparent rounded-0 text-dark px-0 border-0">
+    <article className="card mb-1 bg-transparent rounded-0 text-white px-0 border-0">
       <header className="d-flex justify-content-between align-items-center">
         <h2 className="mb-1 fs-4">{product.name}</h2>
         <p className="mb-1 fs-4">{product.price} SEK</p>

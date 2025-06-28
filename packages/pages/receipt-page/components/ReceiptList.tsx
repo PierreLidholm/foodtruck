@@ -1,9 +1,8 @@
-import type { Receipt } from "../../models/receipt";
+import type { Receipt } from "@pierre/core/models";
 
 type ReceiptListProps = {
     receipt: Receipt;
 }
-
 
 function ReceiptList({receipt} : ReceiptListProps) {
   return (
@@ -25,4 +24,4 @@ function ReceiptList({receipt} : ReceiptListProps) {
   );
 }
 
-export default ReceiptList;
+export  { ReceiptList };
