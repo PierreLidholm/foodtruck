@@ -1,0 +1,5 @@
+{
+    "name": "@pierre/utils",
+    "main": "index.ts",
+    "types": "index.ts"
+}

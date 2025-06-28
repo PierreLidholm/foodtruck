@@ -1,0 +1,5 @@
+{
+    "name": "@pierre/pages",
+    "main": "index.ts",
+    "types": "index.ts"
+}
